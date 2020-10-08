@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_frontend" inherit_id="website.assets_frontend" name="Slides Frontend Assets">
+            <xpath expr="//link[last()]" position="after">
+                <link rel="stylesheet" type="text/scss" href="/fl_auth_signup/static/src/scss/website_frontend_inherit.scss" t-ignore="true"/>
+            </xpath>
+        </template>
+        <template id="auth_signup_fields_extend" inherit_id="auth_signup.fields" name="Signup Fields Extend">
+            <xpath expr="//div[hasclass('field-confirm_password')]" position="after">
+                <div class="form-group field-phone">
+                    <div class="row">
+                        <label for="phone" class="control-label col-md-3">Số điện thoại</label>
+                        <input type="text" name="phone" t-att-value="phone" id="phone" class="form-control col-md-9" required="required" t-att-readonly="'readonly' if only_passwords else None"
+	                    t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+                    </div>
+                </div>
+                <div class="form-group field-street_name">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="street" class="control-label ">Địa chỉ</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <select name="country_id" class="form-control col-md-6" required="required" t-att-readonly="'readonly' if only_passwords else None"
+                                    t-att-autofocus="'autofocus' if login and not only_passwords else None">
+                                    <t t-foreach="countries or []" t-as="country">
+                                        <option t-att-value="country.id">
+                                            <t t-esc="country.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                                <select name="state_id" class="form-control col-md-6" required="required" t-att-readonly="'readonly' if only_passwords else None"
+                                    t-att-autofocus="'autofocus' if login and not only_passwords else None">
+                                    <option value="">Tỉnh/TP</option>
+                                    <t t-foreach="states or []" t-as="state">
+                                        <option t-att-value="state.id">
+                                            <t t-esc="state.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                                <input type="text" name="city" placeholder="Quận/Huyện" t-att-value="city" id="city" class="form-control col-md-6" required="required" t-att-readonly="'readonly' if only_passwords else None"
+                                t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+                                <!--                        <input type="text" name="street" t-att-value="street" id="street" class="form-control col-md-6" required="required" t-att-readonly="'readonly' if only_passwords else None"-->
+<!--                            t-att-autofocus="'autofocus' if login and not only_passwords else None" />-->
+
+                                <input type="text" name="street2" placeholder="Số nhà, đường ..." t-att-value="street2" id="street2" class="form-control col-md-6" required="required" t-att-readonly="'readonly' if only_passwords else None"
+                                t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+
+        <!--                    <input type="text" name="zip" id="zip" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None"-->
+        <!--	                t-att-autofocus="'autofocus' if login and not only_passwords else None" />-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group field-phone">
+                    <div class="row">
+                        <label for="country_id" class="control-label col-md-3">Kiểu tài khoản</label>
+                        <select class="form-control col-md-9" name="company_type">
+                            <option t-attf-value="person">Cá nhân</option>
+                            <option t-attf-value="company">Công ty</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group field-phone">
+                    <div class="row">
+                        <label for="country_id" class="control-label col-md-3">Quy mô</label>
+                        <select class="form-control col-md-9" name="scale">
+                            <option t-attf-value="under10">Duới 10 người</option>
+                            <option t-attf-value="10to50">Từ 10 đến 50 người</option>
+                            <option t-attf-value="50to100">Từ 50 đến 100 người</option>
+                            <option t-attf-value="100to200">Từ 100 đến 200 người</option>
+                            <option t-attf-value="200to300">Từ 200 đến 300 người</option>
+                            <option t-attf-value="300to500">Từ 300 đến 500 người</option>
+                            <option t-attf-value="up500">Trên 500 người</option>
+                        </select>
+                    </div>
+                </div>
+<!--                <div class="form-group field-birthday">-->
+<!--	                <label for="birthday" class="control-label">Your Birthday</label>-->
+<!--	                <input type="date" name="birthday" t-att-value="birthday" id="birthday" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None"-->
+<!--	                t-att-autofocus="'autofocus' if login and not only_passwords else None" />-->
+<!--            	</div>-->
+            </xpath>
+
+        </template>
+    </data>
+</odoo>
