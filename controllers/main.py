@@ -15,8 +15,8 @@ class AuthSignupHome(AuthSignupHome):
     def do_signup(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
         values = {key: qcontext.get(key) for key in ('login', 'name', 'password', 'phone', 'street', 'street2',
-                                                     'zip', 'city', 'state_id', 'country_id', 'scale','company_type')}
-        print(values)
+                                                     'zip', 'city_id', 'state_id', 'country_id', 'scale','company_type')}
+        # print(values)
         values.update({'country_id': int(qcontext.get('country_id'))})
         if not values:
             raise UserError(_("The form was not properly filled in."))
@@ -32,6 +32,9 @@ class AuthSignupHome(AuthSignupHome):
     @http.route('/web/signup', type='http', auth='public', website=True, sitemap=False)
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
+        print("===========================")
+        print(kw.get('state_id'))
+        qcontext['cities'] = request.env['res.city'].sudo().search([['state_id', '=?', kw.get('state_id')]])
         qcontext['states'] = request.env['res.country.state'].sudo().search([])
         qcontext['countries'] = request.env['res.country'].sudo().search([['code', '=', 'VN']])
         if not qcontext.get('token') and not qcontext.get('signup_enabled'):

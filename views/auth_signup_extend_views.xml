@@ -39,8 +39,17 @@
                                         </option>
                                     </t>
                                 </select>
-                                <input type="text" name="city" placeholder="Quận/Huyện" t-att-value="city" id="city" class="form-control col-md-6" required="required" t-att-readonly="'readonly' if only_passwords else None"
-                                t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+<!--                                <input type="text" name="city" placeholder="Quận/Huyện" t-att-value="city" id="city" class="form-control col-md-6" required="required" t-att-readonly="'readonly' if only_passwords else None"-->
+<!--                                t-att-autofocus="'autofocus' if login and not only_passwords else None" />-->
+                                <select name="city_id" class="form-control col-md-6" required="required" t-att-readonly="'readonly' if only_passwords else None"
+                                    t-att-autofocus="'autofocus' if login and not only_passwords else None">
+                                    <option value="">Quận/Huyện</option>
+                                    <t t-foreach="cities or []" t-as="city">
+                                        <option t-att-value="city.id">
+                                            <t t-esc="city.name" />
+                                        </option>
+                                    </t>
+                                </select>
                                 <!--                        <input type="text" name="street" t-att-value="street" id="street" class="form-control col-md-6" required="required" t-att-readonly="'readonly' if only_passwords else None"-->
 <!--                            t-att-autofocus="'autofocus' if login and not only_passwords else None" />-->
 
