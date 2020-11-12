@@ -32,8 +32,6 @@ class AuthSignupHome(AuthSignupHome):
     @http.route('/web/signup', type='http', auth='public', website=True, sitemap=False)
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
-        print("===========================")
-        print(kw.get('state_id'))
         qcontext['cities'] = request.env['res.city'].sudo().search([['state_id', '=?', kw.get('state_id')]])
         qcontext['states'] = request.env['res.country.state'].sudo().search([])
         qcontext['countries'] = request.env['res.country'].sudo().search([['code', '=', 'VN']])
